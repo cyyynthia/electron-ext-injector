@@ -1,0 +1,66 @@
+<!doctype html>
+<head>
+  <title>extensions mgmt</title>
+  <style>
+    body {
+      background-color: #fff;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .btns {
+      display: flex;
+      gap: 16px;
+    }
+
+    .btn {
+      width: 48px;
+    }
+  </style>
+</head>
+<body>
+  <h1>installed extensions</h1>
+
+  <script>
+    window._run = function (exts) {
+      let resolve
+      const promise = new Promise((r) => (resolve = r))
+
+      for (const ext of exts) {
+        const item = document.createElement('div')
+        item.className = 'item'
+        document.body.appendChild(item)
+
+        const name = document.createElement('span')
+        name.innerText = ext.name
+        item.appendChild(name)
+
+        if (ext.options || ext.popup) {
+          const btns = document.createElement('div')
+          btns.className = 'btns'
+          if (ext.options) {
+            const btn = document.createElement('button')
+            btn.innerText = 'open options'
+            btn.addEventListener('click', () => resolve({ dst: ext.baseUrl + ext.options, action: 'options' }))
+            btns.appendChild(btn)
+          }
+
+          if (ext.popup) {
+            const btn = document.createElement('button')
+            btn.innerText = 'open popup'
+            btn.addEventListener('click', () => resolve({ dst: ext.baseUrl + ext.popup, action: 'popup' }))
+            btns.appendChild(btn)
+          }
+
+          item.appendChild(btns)
+        }
+      }
+
+      return promise
+    }
+  </script>
+</body>
