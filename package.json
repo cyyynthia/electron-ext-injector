@@ -1,0 +1,11 @@
+{
+  "name": "@cyyynthia/electron-ext-injector",
+  "author": "Cynthia <cynthia@cynthia.dev>",
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "undici": "^5.4.0",
+    "unzipper": "^0.10.11"
+  }
+}
