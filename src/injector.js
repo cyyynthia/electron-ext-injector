@@ -1,4 +1,4 @@
-/** Copyright (c) 2022 Cynthia K. Rey, All rights reserved. */
+/*! Copyright (c) Cynthia Rey, All rights reserved. */
 
 import { join } from 'path'
 import { existsSync } from 'fs'
@@ -18,16 +18,16 @@ const runtimeFile = join(executable, '..', 'eei-loader.js')
 // prepare runtime if not exists
 if (!existsSync(extFolder)) await mkdir(extFolder)
 if (!existsSync(runtimeFile)) {
-  await symlink(runtime, runtimeFile)
-  await injectScript(executable, runtimeFile)
+	await symlink(runtime, runtimeFile)
+	await injectScript(executable, runtimeFile)
 }
 
 // link extension
 if (existsSync(ext)) {
-  const id = randomUUID()
-  await symlink(ext, join(extFolder, id))
-  console.log('done')
-  process.exit(0)
+	const id = randomUUID()
+	await symlink(ext, join(extFolder, id))
+	console.log('done')
+	process.exit(0)
 }
 
 await downloadExt(executable, extFolder, ext)
